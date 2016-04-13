@@ -7,12 +7,10 @@ def validateUsername(request):
     regex = re.compile('([^\\s]+)\\@[^\\s]+')
 
     if settings.USERNAME_SUFIX is not None:
-        if request.get('username').find(settings.USERNAME_SUFIX) > 0:
-            matched = regex.match(request.get('username'))
-
+        if (request.__getitem__('username').find(settings.USERNAME_SUFIX)) >= 0:
+            matched = regex.match(request.__getitem__('username'))
             if matched:
-                value = "%s%s" % (matched.group(1), settings.USERNAME_NEW_SUFIX)
-                request.__setitem__('username', value)
-
+                name = "%s%s" % (matched.group(1), settings.USERNAME_NEW_SUFIX)
+                request.__setitem__('username', name)
 
     return request

@@ -23,13 +23,13 @@ class TestAuthldap(TestCase):
     def setUp(self):
         self.user = User.objects.create_user(username='user1', 
             password="secret1", 
-            email="user1@user.com",
+            email="user1@user.com", 
             first_name="new_user"
             )
-        self.user2 = User.objects.create_user(username='user2',
-            password="secret2",
-            email="user2@user.com",
-            first_name="old_user",
+        self.user2 = User.objects.create_user(username='user2', 
+            password="secret2", 
+            email="user2@user.com", 
+            first_name="old_user", 
             is_superuser=True
             )
 
@@ -61,7 +61,7 @@ class TestAuthldap(TestCase):
         self.assertEqual(response.data.get('name'), 'old_user')
         self.assertEqual(response.data.get('token'), token)
         self.assertEqual(response.data.get('suser'), True)
-
+        
     def tearDown(self):
         self.user.delete()
         self.user2.delete()
