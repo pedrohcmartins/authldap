@@ -1,0 +1,11 @@
+django>=1.9.1
+coverage
+mock>=1.0.1
+flake8>=2.1.0
+tox>=1.7.0
+
+# Additional test requirements go here
+
+djangorestframework>=3.3.3
+django-python3-ldap>=0.9.9
+django-cors-headers>=1.1.0

@@ -1,0 +1,7 @@
+django>=1.9.4
+# Additional requirements go here
+
+djangorestframework>=3.3.3
+django-python3-ldap>=0.9.9
+django-cors-headers>=1.1.0
+
