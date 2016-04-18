@@ -1,4 +1,3 @@
-from django.contrib.auth import logout
 from rest_framework.authtoken.views import ObtainAuthToken, APIView
 from rest_framework.authtoken.models import Token
 from rest_framework.response import Response
@@ -28,9 +27,11 @@ class logoutView(APIView):
 
     def post(self, request):
         if request.user.is_authenticated():
-            logout(request)
+            user = request.user
             UserLog.objects.create(user=user, type='logout')
-
-            return Response({
-                'user': 'User logout with success'
+            Token.objects.get(user=user).delete()
+            response = Response({
+                'user': 'User logout success'
             })
+
+        return response
