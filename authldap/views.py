@@ -9,7 +9,7 @@ from authldap.models import UserLog
 class AuthToken(ObtainAuthToken):
 
     def post(self, request):
-        request = validateUsername(request.data.copy())
+        request = validate_username(request.data.copy())
         serializer = self.serializer_class(data=request)
         serializer.is_valid(raise_exception=True)
         user = serializer.validated_data['user']
@@ -23,7 +23,7 @@ class AuthToken(ObtainAuthToken):
         })
 
 
-class logoutView(APIView):
+class LogoutView(APIView):
 
     def post(self, request):
         if request.user.is_authenticated():

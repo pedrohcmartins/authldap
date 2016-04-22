@@ -2,7 +2,7 @@ import re
 from django.conf import settings
 
 
-def validateUsername(request):
+def validate_username(request):
     
     regex = re.compile('([^\\s]+)\\@[^\\s]+')
 
