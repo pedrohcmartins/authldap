@@ -26,16 +26,15 @@ class AuthToken(ObtainAuthToken):
 class LogoutView(APIView):
 
     def post(self, request):
-        response = Response({
-            'user': 'User logout failed'    
-        })
-
         if request.user.is_authenticated():
             user = request.user
             UserLog.objects.create(user=user, type='logout')
             #Token.objects.get(user=user).delete()
-            response = Response({
+            return Response({
                 'user': 'User logout success'
-            })
+                })
+        else:
+            return Response({
+                'user': 'User logout failed'
+                })
         
-        return response
