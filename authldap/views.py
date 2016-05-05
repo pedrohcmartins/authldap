@@ -33,5 +33,9 @@ class LogoutView(APIView):
             response = Response({
                 'user': 'User logout success'
             })
+        else:
+            response = Response({
+                'user': 'User logout failed'    
+            })
 
         return response
