@@ -20,7 +20,7 @@ class AuthToken(ObtainAuthToken):
             'name': user.first_name,
             'email': user.email,
             'is_staff': user.is_staff,
-            'group': user.groups.values(),
+            'group': user.groups.values_list(),
         })
 
 
