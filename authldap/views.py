@@ -19,8 +19,8 @@ class AuthToken(ObtainAuthToken):
             'token': token.key,
             'name': user.first_name,
             'email': user.email,
-            'staff': user.is_staff,
-            'controls': user.groups.values(),
+            'is_staff': user.is_staff,
+            'group': user.groups.values(),
         })
 
 
