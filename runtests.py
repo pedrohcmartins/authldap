@@ -35,10 +35,7 @@ try:
             'django.middleware.clickjacking.XFrameOptionsMiddleware',
             'corsheaders.middleware.CorsMiddleware',    
         ),
-        
-
-
-
+        USERNAME_SUFFIX=None,        
     )
 
     try:
