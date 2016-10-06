@@ -16,6 +16,7 @@ class AuthToken(ObtainAuthToken):
         token, created = Token.objects.get_or_create(user=user)
         UserLog.objects.create(user=user, type='login')
         return Response({
+            'id': user.id,
             'token': token.key,
             'name': user.first_name,
             'email': user.email,
