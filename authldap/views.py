@@ -22,6 +22,7 @@ class AuthToken(ObtainAuthToken):
             'email': user.email,
             'is_staff': user.is_staff,
             'group': [group['name'] for group in user.groups.values()],
+            'permissions': [permission['codename'] for permission in user.user_permissions.values()]
         })
 
 
