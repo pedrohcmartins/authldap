@@ -8,11 +8,9 @@ test_authldap
 Tests for `authldap` models module.
 """
 
-from django.test import TestCase, Client
-
-from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
-from django.contrib.auth import get_user_model
+from django.core.urlresolvers import reverse
+from django.test import TestCase, Client
 from rest_framework.authtoken.models import Token
 
 from authldap.models import UserLog
@@ -21,7 +19,6 @@ client = Client()
 
 
 class TestAuthldap(TestCase):
-
     def setUp(self):
         self.user = User.objects.create_user(
             username='user1',
@@ -84,7 +81,6 @@ class TestAuthldap(TestCase):
             first_name="new_user_test",
         )
 
-
         response = self.client.post(
             reverse('token-auth'),
             {'username': 'user3',
@@ -92,7 +88,6 @@ class TestAuthldap(TestCase):
         )
 
         self.assertEqual(response.data.get('id'), 3)
-
 
     def tearDown(self):
         self.user.delete()
