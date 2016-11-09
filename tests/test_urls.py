@@ -36,7 +36,11 @@ class TestAuthldap(TestCase):
 
     def test_response_url(self):
         self.assertEqual(User.objects.count(), 2)
-        response = self.client.post(reverse('token-auth'))
+        response = self.client.post(
+            reverse('token-auth'),
+            {'username': 'user1',
+             'password': 'secret1'}
+        )
 
         token = Token.objects.get(user__username=self.user).key
         self.assertEqual(response.status_code, 200)
@@ -49,7 +53,11 @@ class TestAuthldap(TestCase):
         self.assertEqual(UserLog.objects.get(user=self.user).type, 'login')
         self.assertEqual(UserLog.objects.count(), 1)
 
-        response = self.client.post(reverse('token-auth'))
+        response = self.client.post(
+            reverse('token-auth'),
+            {'username': 'user2',
+             'password': 'secret2'}
+        )
 
         token = Token.objects.get(user=self.user2).key
         self.assertEqual(response.status_code, 200)
@@ -73,7 +81,11 @@ class TestAuthldap(TestCase):
             first_name="new_user_test",
         )
 
-        response = self.client.post(reverse('token-auth'))
+        response = self.client.post(
+            reverse('token-auth'),
+            {'username': 'user3',
+             'password': 'secret3'}
+        )
 
         self.assertEqual(response.data.get('id'), 3)
 
