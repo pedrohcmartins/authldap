@@ -22,6 +22,7 @@ class AuthToken(ObtainAuthToken):
             'name': user.first_name,
             'email': user.email,
             'is_staff': user.is_staff,
+            'is_superuser': user.is_superuser,
             'coordenacao_regional': user.coordenacao_regional,
             'group': [group['name'] for group in user.groups.values()],
             'permissions': Permission.objects.filter(group__id__in=groups).values_list('codename',
