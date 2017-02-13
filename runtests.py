@@ -35,7 +35,36 @@ try:
             'django.middleware.clickjacking.XFrameOptionsMiddleware',
             'corsheaders.middleware.CorsMiddleware',    
         ),
-        USERNAME_SUFFIX=None,        
+
+        AUTHENTICATION_BACKENDS = (
+            # 'django_python3_ldap.auth.LDAPBackend',
+            'django.contrib.auth.backends.ModelBackend',
+        ),
+
+        ########## AUTH USER RESPONSE DATA ##########
+        AUTH_USER_RESPONSE= {
+            'is_superuser': 'is_superuser',
+            'is_staff': 'is_staff',
+        },
+        ########## END AUTH USER RESPONSE DATA ##########
+
+        # ########## LDAP CONFIG ##########
+        # LDAP_AUTH_URL = 'ldap://0.0.0.0:389',
+        # LDAP_AUTH_USE_TLS = False,
+        # LDAP_AUTH_SEARCH_BASE = 'ou=Users,ou=users,o=rede,c=br',
+        # LDAP_AUTH_USER_FIELDS = {
+        #     "username": "uid",
+        #     "name": "cn",
+        #     "last_name": "sn",
+        #     "email": "mail",
+        # },
+        # LDAP_AUTH_USER_LOOKUP_FIELDS = ("username",),
+        # ########## END LDAP CONFIG ##########
+
+        # # AUTH BACKEND CONFIG TEST USER VALIDATION
+        # LDAP_USER = '',
+        # LDAP_PASSWORD = '',
+             
     )
 
     try:
