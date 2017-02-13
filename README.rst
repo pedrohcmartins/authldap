@@ -22,6 +22,7 @@ Then use it in a project::
     import authldap
 
 To add custom user attributes to your response, you must add it into your settings file::
+
     AUTH_USER_RESPONSE = {
         'is_superuser': 'is_superuser',
         'is_staff': 'is_staff',
