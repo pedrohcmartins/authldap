@@ -34,7 +34,7 @@ class AuthToken(ObtainAuthToken):
                     ).values_list('codename', flat=True)
         }
 
-        if settings.AUTH_USER_RESPONSE:
+        if hasattr(settings, 'AUTH_USER_RESPONSE'):
             response.update(
                 get_user_data(settings.AUTH_USER_RESPONSE, user)
             )
