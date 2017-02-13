@@ -26,10 +26,19 @@ Then use it in a project::
 
     import authldap
 
+To add user attrs with your response, you need to add it in your settings, 
+(Where the object key is the value in your response, and the object value is the data from your model), as::
+    AUTH_USER_RESPONSE = {
+        'is_superuser': 'is_superuser',
+        'is_staff': 'is_staff',
+    }
+
 Features
 --------
 
-* TODO
+* TODO::
+	- Add user session validation;
+
 
 Running Tests
 --------------
