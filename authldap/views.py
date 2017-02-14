@@ -19,6 +19,7 @@ class AuthToken(ObtainAuthToken):
         serializer = self.serializer_class(data=request)
         serializer.is_valid(raise_exception=True)
         user = serializer.validated_data['user']
+        new_user = UserLog.objects.filter(user=user, type='login').count() == 0
         token, created = Token.objects.get_or_create(user=user)
         UserLog.objects.create(user=user, type='login')
         groups = [group['id'] for group in user.groups.values()]
@@ -26,6 +27,7 @@ class AuthToken(ObtainAuthToken):
         response = {
             'token': token.key,
             'id': user.id,
+            'new_user': new_user,
             'name': user.first_name,
             'email': user.email,
             'group': [group['name'] for group in user.groups.values()],

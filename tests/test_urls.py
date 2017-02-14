@@ -145,7 +145,6 @@ class TestAuthenticationUrl(TestCase):
 
         self.assertEqual(login.status_code, 200)
         self.assertEqual(login.data['email'], 'user1@user.com')
-        self.assertEqual(login.data['email'], 'user1@user.com')
         token = login.data['token']
 
         client = APIClient()
@@ -176,6 +175,48 @@ class TestAuthenticationUrl(TestCase):
              'password': 'user1'}
         )
         self.assertEqual(login.status_code, 200)
+
+
+    def test_last_login(self):
+
+        user = User.objects.create_user(
+            username='user2',
+            password='another_pass',
+            email="user2@user.com",
+            first_name="another_user"
+        )
+
+        for i in range(10):
+
+            login = self.client.post(
+                reverse('token-auth'),
+                {'username': 'user1',
+                 'password': self.raw_pass}
+            )
+            self.assertEqual(login.status_code, 200)
+            self.assertEqual(login.data['email'], 'user1@user.com')
+            if i == 0:
+                self.assertEqual(login.data['new_user'], True)
+            else:    
+                self.assertEqual(login.data['new_user'], False)
+
+        login = self.client.post(
+            reverse('token-auth'),
+            {'username': 'user2',
+             'password': 'another_pass'}
+        )
+        self.assertEqual(login.status_code, 200)
+        self.assertEqual(login.data['email'], 'user2@user.com')
+        self.assertEqual(login.data['new_user'], True)
+
+        login = self.client.post(
+            reverse('token-auth'),
+            {'username': 'user2',
+             'password': 'another_pass'}
+        )
+        self.assertEqual(login.status_code, 200)
+        self.assertEqual(login.data['email'], 'user2@user.com')
+        self.assertEqual(login.data['new_user'], False)
 
     def tearDown(self):
         for token in Token.objects.all():
