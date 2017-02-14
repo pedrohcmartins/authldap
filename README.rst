@@ -8,12 +8,7 @@ authldap
 .. image:: https://travis-ci.org/dagnaldo/authldap.png?branch=master
     :target: https://travis-ci.org/dagnaldo/authldap
 
-A simple project to auth with ldap
-
-Documentation
--------------
-
-The full documentation is at https://authldap.readthedocs.org.
+A simple project that implements authentication via ldap with user custom models:
 
 Quickstart
 ----------
@@ -26,17 +21,18 @@ Then use it in a project::
 
     import authldap
 
-To add user attrs with your response, you need to add it in your settings, 
-(Where the object key is the value in your response, and the object value is the data from your model), as::
+To add custom user attributes to your response, you must add it into your settings file::
+
     AUTH_USER_RESPONSE = {
         'is_superuser': 'is_superuser',
         'is_staff': 'is_staff',
+        'management': 'coord...', 
     }
 
 Features
 --------
 
-* TODO::
+* TODO:
 	- Add user session validation;
 
 
