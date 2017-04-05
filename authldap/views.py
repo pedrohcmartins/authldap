@@ -32,7 +32,6 @@ class AuthToken(ObtainAuthToken):
             'email': user.email,
             'group': [group['name'] for group in user.groups.values()],
             'institutions': [institution['name'] for institution in user.institutions.values()],
-            'fpes': [fpe['js_ti'] for fpe in user.fpes.values()],
             'permissions': Permission.objects.filter(
                     group__id__in=groups
                     ).values_list('codename', flat=True)
